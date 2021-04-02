@@ -1,0 +1,91 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    height: 600px;
+    box-sizing: border-box;
+    margin: 5% 15%;
+    padding: 2% 3%;
+    background-color: lightgray;
+}
+
+.arrow, .carousel{
+    display: flex;
+}
+
+.arrow{
+    height: 100%;
+    width: 50px;
+}
+
+.left, .right{
+    height: 50px;
+    margin: auto;
+}
+
+.carousel{
+    height: 90%;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 1%;
+    padding: 1%;
+}
+
+.movies{
+    width: 100%;
+    position: relative;
+}
+
+.movie{
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    position: absolute;
+}
+
+.movie-name{
+    margin: 0%;
+    color: black;
+}
+
+.movie-info{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.movie-image{
+    height: 100%;
+    width: 100%;
+}
+
+.info-hover{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: black;
+    color: white;
+    font-family: sans-serif;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: visibility 0s, opacity 2s linear; 
+    transition: visibility 0s, opacity 1s linear;
+}
+
+.movie-info:hover .info-hover{
+    height: 100%;
+    width: 40%;
+    /* padding: 8px 15px; */
+    visibility: visible;
+    opacity: 0.8; 
+}
+
+.data{
+    height: 60%;
+    width: 90%;
+    margin: auto;
+}
