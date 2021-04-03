@@ -1,3 +1,8 @@
+/* f67280
+c06c84
+6c5b7b
+355c7d */
+
 * {
   margin: 0;
   outline: none;
@@ -32,12 +37,13 @@ body {
 }
 
 .logo-container {
-  flex: 1;
+  flex: 4;
 }
 
 .logo {
+  font-family: 'New Tegomin', serif;
   font-size: 30px;
-  color: #4dbf00;
+  color: #6c5b7b;
 }
 
 .menu-container {
@@ -77,6 +83,7 @@ input, button{
   height: 40px;
   margin: auto;
   margin-top: 250px;
+  margin-bottom: 250px;
   background-color: #ff7575;
   border-radius: 10px;
   box-shadow: 0 5px 10px #ff7c7c, 0 0 0 15px #ffffffeb;
@@ -103,7 +110,8 @@ form{
 }
 
 input[type="text"]::placeholder{
-  color: #e16868;
+  /* color: #e16868; */
+  color: white;
   text-align: center;
 }
 

@@ -5,7 +5,10 @@
     box-sizing: border-box;
     margin: 5% 15%;
     padding: 2% 3%;
-    background-color: lightgray;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    background-color: rgb(248, 246, 248);
+    box-shadow: 0 5px 10px #c06c84;
 }
 
 .arrow, .carousel{
@@ -46,7 +49,8 @@
 
 .movie-name{
     margin: 0%;
-    color: black;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .movie-info{
@@ -58,6 +62,7 @@
 .movie-image{
     height: 100%;
     width: 100%;
+    border-radius: 20px;
 }
 
 .info-hover{
@@ -78,10 +83,10 @@
 
 .movie-info:hover .info-hover{
     height: 100%;
-    width: 40%;
+    width: 50%;
     /* padding: 8px 15px; */
     visibility: visible;
-    opacity: 0.8; 
+    opacity: 0.8;
 }
 
 .data{
