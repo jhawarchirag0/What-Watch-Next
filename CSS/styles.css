@@ -1,0 +1,123 @@
+.container1 {
+  position: relative;
+  width: 50%;
+  width: 20%;
+ float: left;
+ padding: 7px;
+ padding-left: 10px;  
+ display: block;
+}
+.R{
+  height: 450px;
+  width: 1550px;
+  box-sizing: border-box;
+  align-content: center;
+  margin: auto;
+  justify-content: center;
+  padding-top: 10%;
+  padding-left: 2%;
+}
+.image {
+  border-radius: 10%;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: #008CBA;
+  overflow: hidden;
+  width: 100%;
+  height:0;
+  transition: .5s ease;
+}
+
+.container1:hover .overlay {
+  bottom: 0;
+  height: 100%;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+/* Final Video Styles */
+.flexbox-container {
+    height:500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@font-face{
+    font-family: 'Dancing Script';
+    src:url(../Fonts/Dancing_Script.ttf);
+    font-style: normal;
+    font-weight: 100;
+}
+
+.flexbox-item {
+    width: 200px;
+    margin: 10px;
+    border: 3px solid #000000;
+    background-color: #dfdfdf;
+}
+/* right*/
+.flexbox-item-1 {
+    font-family: Dancing Script;
+    padding-top: 25px; 
+    padding-left: 25px;
+    border: 7px solid #000000;
+    justify-content: center;
+    flex: 1 0;
+    height: 350px;
+    order: 2;
+}
+
+.flexbox-item-2 {
+    background-image:url('../Images/1.jpg');
+    border: 7px solid #000000;
+    height: 350px;
+    width:500px;
+    align-self: center;
+    order: 1;
+}
+
+/* Background Styles */
+/* for entire box */
+html {
+  /* solved the problem of not entire screen visible*/
+    height: 200%;
+    width: 100%;
+    background-color: pink;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flexbox-container {
+    /*position: relative;*/
+    background-color: pink;
+}
+
+
+.M{
+  background-color: pink;
+}
+.F{
+  /*font-family: Dancing Script;*/
+  font-family: Algerian;
+  text-align: center; 
+  font-size: 40px;
+}
