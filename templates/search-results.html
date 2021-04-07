@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/search-results-style.css">
+    <!--
+        <link rel="stylesheet" href="../CSS/search-results-style.css">
+
+    -->
+    
+    <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/search-results-style.css') }}">
+
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"      rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/carousel.css">
-
+   
+    <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/carousel.css') }}">
     <!-- add -->
-    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/styles.css') }}">
     <!-- block -->
 
     <script src="../js-files/slideshow.js"></script>
+
+    <script src="{{ url_for('static' , filename ='js-files/slideshow.js') }}"></script>
     <title>Search Results</title>
 </head>
 
@@ -36,9 +45,9 @@
         </div>
     </div>
 	<div class="search-bar">
-		<form method="get" action="">
+		<form method="POST" action="{{ url_for('search')}}">
             <div class="tb">
-                <input class="search-movie" type="text" placeholder="Search for Movie">
+                <input name="movie_name" class="search-movie" type="text" placeholder="Search for Movie">
                 <div id="s-cover">
                     <button type="submit">
                         <div id="s-circle"></div>
@@ -53,19 +62,24 @@
     <!-- START -->
     <div class="M">
       <div class="flexbox-container">
-        <div class="flexbox-item flexbox-item-1">
+        <div class="flexbox-item-1">
         <h3>    
-        <p><b>Movie Name: </b></p>
+        <p><b>Movie Title:          {{movien[0]}} </b></p>
+        
         <br>
-        <p><b>Movie Rating: </b></p>
+        <p><b>Movie Rating:        {{movien[2]}}</b></p>
+        
         <br>
-        <p><b>Movie Release year: </b></p><br>
-        <p><b>Platform released on : </b></p><br>
-        <p><b>Platform released on : </b></p><br>
-        <p><b>Some more information: </b></p>
+        <p><b>Movie Release Date:  {{movien[3]}}</b></p>
+        
+       <br>
+        <p><b>Movie Overview :     {{movien[1]}}</b></p><br>
+        <p><b>Platform Genre :     {{movien[4]}}</b></p><br>
        </h3>
         </div>
-        <div class="flexbox-item flexbox-item-2"></div>
+        <div class="flexbox-item flexbox-item-2">
+            <img src="{{movien[5]}}" width="500" height="350">
+        </div>
       </div>
 <!--
 <div class=F>
@@ -75,25 +89,25 @@
  <div class="R">
 
       <div class="container1">
-        <img src="../Images/tenet.jpg" alt="Avatar" class="image">
+        <img src="{{ url_for('static' , filename ='Images/tenet.jpg') }}" alt="Avatar" class="image">
         <div class="overlay">
           <div class="text">Name and link</div>
         </div>
       </div>
       <div class="container1">
-        <img src="../Images/tenet.jpg" alt="Avatar" class="image">
+        <img src="{{ url_for('static' , filename ='Images/tenet.jpg') }}" alt="Avatar" class="image">
         <div class="overlay">
           <div class="text">Name and link</div>
         </div>
       </div>
       <div class="container1">
-        <img src="../Images/tenet.jpg" alt="Avatar" class="image">
+        <img src="{{ url_for('static' , filename ='Images/tenet.jpg') }}" alt="Avatar" class="image">
         <div class="overlay">
           <div class="text">Name and link</div>
         </div>
       </div>
       <div class="container1">
-        <img src="../Images/tenet.jpg" alt="Avatar" class="image">
+        <img src="{{ url_for('static' , filename ='Images/tenet.jpg') }}" alt="Avatar" class="image">
         <div class="overlay">
           <div class="text">Name and link</div>
         </div>
@@ -107,14 +121,14 @@
 
     <div class="container">
         <div class="arrow">
-            <img class="left" src="../Images/left.webp" onclick="nextImage()">
+            <img class="left" src="{{ url_for('static' , filename ='Images/left.webp') }}" onclick="nextImage()">
         </div>
         <div class="carousel">
             <div class="movies">
                 <div class="movie">
                     <center><h3 class="movie-name">TENET</h3></center>
                     <div class="movie-info">
-                        <img class="movie-image" src="../Images/tenet.jpg" alt="Tenet">
+                        <img class="movie-image" src="{{ url_for('static' , filename ='Images/tenet.jpg') }}" alt="Tenet">
                         <div class="info-hover">
                             <div class="data">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ut recusandae odit dolorum reiciendis cumque quas earum laborum, rerum reprehenderit blanditiis omnis molestiae nesciunt explicabo id illo provident fuga vero? Debitis cupiditate optio consequuntur laudantium officia. Dolor delectus dicta necessitatibus commodi, eos ipsa saepe obcaecati labore corrupti! Ullam, saepe error.</p>
@@ -125,7 +139,7 @@
                 <div class="movie">
                     <center><h3 class="movie-name">Knives Out</h3></center>
                     <div class="movie-info">
-                        <img class="movie-image" src="../Images/knives-out.jpg" alt="Knives Out">
+                        <img class="movie-image" src="{{ url_for('static' , filename ='Images/knives-out.jpg') }}" alt="Knives Out">
                         <div class="info-hover">
                             <div class="data">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ut recusandae odit dolorum reiciendis cumque quas earum laborum, rerum reprehenderit blanditiis omnis molestiae nesciunt explicabo id illo provident fuga vero? Debitis cupiditate optio consequuntur laudantium officia. Dolor delectus dicta necessitatibus commodi, eos ipsa saepe obcaecati labore corrupti! Ullam, saepe error.</p>
@@ -136,7 +150,7 @@
                 <div class="movie">
                     <center><h3 class="movie-name">1917</h3></center>
                     <div class="movie-info">
-                        <img class="movie-image" src="../Images/1917.jpg" alt="1917">
+                        <img class="movie-image" src="{{ url_for('static' , filename ='Images/1917.jpg') }}" alt="1917">
                         <div class="info-hover">
                             <div class="data">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ut recusandae odit dolorum reiciendis cumque quas earum laborum, rerum reprehenderit blanditiis omnis molestiae nesciunt explicabo id illo provident fuga vero? Debitis cupiditate optio consequuntur laudantium officia. Dolor delectus dicta necessitatibus commodi, eos ipsa saepe obcaecati labore corrupti! Ullam, saepe error.</p>
@@ -147,7 +161,7 @@
             </div>
         </div>
         <div class="arrow">
-            <img class="right" src="../Images/right.webp" onclick="prevImage()">
+            <img class="right" src="{{ url_for('static' , filename ='Images/right.webp') }}" onclick="prevImage()">
         </div>
     </div>
 </body>

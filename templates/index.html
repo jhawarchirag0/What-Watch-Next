@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/home-style.css">
+    <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/home-style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"      rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap&Dela+Gothic+One&display=swap" rel="stylesheet">
     <title>What Watch Next ?</title>
@@ -28,9 +28,9 @@
         </div>
     </div>
 	<div class="search-bar">
-		<form method="get" action="">
+		<form method="POST" action="{{ url_for('search')}}">
             <div class="tb">
-                <input class="search-movie" type="text" placeholder="Search for Movie">
+                <input name="movie_name" class="search-movie" type="text" placeholder="Search for Movie">
                 <div id="s-cover">
                     <button type="submit">
                         <div id="s-circle"></div>
