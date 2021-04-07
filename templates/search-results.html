@@ -64,21 +64,21 @@
       <div class="flexbox-container">
         <div class="flexbox-item-1">
         <h3>    
-        <p><b>Movie Title:          {{movien[0]}} </b></p>
+        <p><b>Movie Title:          {{movien[0][0]}} </b></p>
         
         <br>
-        <p><b>Movie Rating:        {{movien[2]}}</b></p>
+        <p><b>Movie Rating:        {{movien[0][2]}}</b></p>
         
         <br>
-        <p><b>Movie Release Date:  {{movien[3]}}</b></p>
+        <p><b>Movie Release Date:  {{movien[0][3]}}</b></p>
         
        <br>
-        <p><b>Movie Overview :     {{movien[1]}}</b></p><br>
-        <p><b>Platform Genre :     {{movien[4]}}</b></p><br>
+        <p><b>Movie Overview :     {{movien[0][1]}}</b></p><br>
+        <p><b>Platform Genre :     {{movien[0][4]}}</b></p><br>
        </h3>
         </div>
         <div class="flexbox-item flexbox-item-2">
-            <img src="{{movien[5]}}" width="500" height="350">
+            <img src="{{movien[0][5]}}" width="500" height="350">
         </div>
       </div>
 <!--
@@ -89,25 +89,25 @@
  <div class="R">
 
       <div class="container1">
-        <img src="{{ url_for('static' , filename ='Images/tenet.jpg') }}" alt="Avatar" class="image">
+        <img src="{{movien[2][2]}}" class="image">
         <div class="overlay">
           <div class="text">Name and link</div>
         </div>
       </div>
       <div class="container1">
-        <img src="{{ url_for('static' , filename ='Images/tenet.jpg') }}" alt="Avatar" class="image">
+        <img src="{{movien[3][2]}}" class="image">
         <div class="overlay">
           <div class="text">Name and link</div>
         </div>
       </div>
       <div class="container1">
-        <img src="{{ url_for('static' , filename ='Images/tenet.jpg') }}" alt="Avatar" class="image">
+        <img src="{{movien[4][2]}}" class="image">
         <div class="overlay">
           <div class="text">Name and link</div>
         </div>
       </div>
       <div class="container1">
-        <img src="{{ url_for('static' , filename ='Images/tenet.jpg') }}" alt="Avatar" class="image">
+        <img src="{{movien[5][2]}}" class="image">
         <div class="overlay">
           <div class="text">Name and link</div>
         </div>
