@@ -8,7 +8,7 @@ app=Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index1.html')
 
 # @app.route('/search',methods=['POST'])
 # def search():
@@ -46,7 +46,7 @@ def search():
     actors = []
     x=0
     for i in cast:
-        if(i['known_for_department']=='Acting' and x<3):
+        if(i['known_for_department']=='Acting' and x<4):
             xyz = "https://image.tmdb.org/t/p/original"+i['profile_path']
             act1 = [i['name'],i['character'],xyz,i['id']]
             actors.append(act1)
@@ -95,7 +95,11 @@ def search():
    
     actor3_name = actors[2][0]
     actor3_character = actors[2][1]
-    actor3_image = actors[2][2]   
+    actor3_image = actors[2][2] 
+
+    actor4_name = actors[3][0]
+    actor4_character = actors[3][1]
+    actor4_image = actors[3][2]  
    
 
     #director_info:
@@ -109,8 +113,12 @@ def search():
     actor1 = [actor1_name,actor1_character,actor1_image]
     actor2 = [actor2_name,actor2_character,actor2_image]
     actor3 = [actor3_name,actor3_character,actor3_image]
+    actor4 = [actor4_name,actor4_character,actor4_image]
+
+   
+
     
-    return render_template('search-results.html',movien=[movie,director,actor1,actor2,actor3,director])
+    return render_template('search-results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4])
 
 
 if __name__=="__main__":
