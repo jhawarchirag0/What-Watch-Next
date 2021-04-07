@@ -1,28 +1,30 @@
-.container1 {
-  position: relative;
-  width: 50%;
-  width: 20%;
- float: left;
- padding: 7px;
- padding-left: 10px;  
- display: block;
-}
-
-.image {
-  height:"150" ;
-  border-radius: 10%;
-  display: block;
-}
-
 .R{
   height: 450px;
-  width: 1550px;
+  width: 100%;
   box-sizing: border-box;
   align-content: center;
   margin: auto;
-  justify-content: center;
   padding-top: 10%;
   padding-left: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.container1 {
+  position: relative;
+ /* float: left; */
+ padding: 7px;
+ padding-left: 10px;  
+ display: block;
+ height: 300px;
+ margin: 2%;
+}
+
+.cast-image {
+  height: 300px;
+  width: 200px;
+  border-radius: 10%;
+  /* display: block; */
 }
 
 .overlay {
