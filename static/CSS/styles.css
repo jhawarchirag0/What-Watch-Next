@@ -20,6 +20,8 @@
  margin: 0% 2% 2% 2%;
 }
 
+
+
 .cast-image {
   height: 300px;
   width: 200px;
@@ -45,7 +47,8 @@
 }
 
 .text {
-  color: yellowgreen;
+  font-family: Dancing Script;
+  color:red;
   font-size: 20px;
   position: absolute;
   top: 50%;

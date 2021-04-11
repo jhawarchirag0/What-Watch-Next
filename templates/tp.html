@@ -1,18 +1,16 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-{{movien[0][0]}}
-{{movien[0][2]}}
-{{movien[0][3]}}
-<img src="{{movien[0][5]}}" alt="Girl in a jacket" width="400" height="400">
-<
-{{movien[1][0]}}
-
-<img src="{{movien[2][2]}}" alt="Girl in a jacket" width="400" height="400">
-
-        
-    
-
-
+<body>
+    <script>
+        temp = JSON.parse({{ movien[7] | tojson}})
+        // console.log(temp);
+        console.log(temp["overview"][0]);
+    </script>
+</body>
 </html>

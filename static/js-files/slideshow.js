@@ -15,6 +15,7 @@ function init(){
 
 window.onload = function() {
   x = document.getElementsByClassName("movie");
+  console.log(x);
   init();
 }
 
