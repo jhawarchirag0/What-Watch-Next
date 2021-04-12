@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Cast Info</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/cast_style.css') }}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="container">
+  <div class="movie_card"> 
+    <div class="movie_img">
+      <img src="{{actor4[2]}}">
+	</div>
+
+  <div class="bg-text">{{actor4[0]}}</div>
+    <div class="movie">
+      <!-- <div class="movie_rating">7.3<i>/</i> 10 <span>IMDb</span></div> -->
+			<h3 class="movie_title">{{actor4[0]}}</h3>
+        
+			<div class="movie_info">
+				<span>
+					<i class="far fa-clock"></i>
+					Runtime: <br>2h 28min
+				</span>
+				<span>
+					<i class="fas fa-film"></i>
+					Birth Place: <br>{{actor4[4]}}
+				</span>
+				<span>
+					<i class="far fa-calendar"></i>
+					Birth date: <br>{{actor4[3]}}
+				</span>
+			</div>
+
+			<div class="movie_text">
+				<p>
+					{{actor4[5]}} 
+				</p>
+			 </div>
+		 </div>
+	 </div>
+</div>
+<!-- partial -->
+  
+</body>
+</html>

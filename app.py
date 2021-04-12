@@ -9,6 +9,7 @@ from numpy import load
 app=Flask(__name__)
 new_df,indices,new_df2 = None,None,None
 cosine_sim_overview,cosine_sim_cast,cosine_sim_crew,cosine_sim_genres=None,None,None,None
+actor1,actor2,actor3,actor4,director=None,None,None,None,None
 @app.route('/')
 def home():
     return render_template('index1.html')
@@ -43,7 +44,8 @@ def search():
     # get_recom = json.dumps(get_recom)
     get_recom = new_df
 
-    
+    global actor1,actor2,actor3,actor4,director
+
     tmdb.API_KEY = "4d437864b2f333cb0fc07c9b104397c6"
     concat_link = "http://api.themoviedb.org/3/search/movie?query="+movie_name+"&api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
     info = requests.get(concat_link)
@@ -51,9 +53,10 @@ def search():
     id1 = json_edit['results']
     id2 = id1[0]
     movie_id = id2['id']
-    gen = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US')
 
+    gen = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US')
     genre_list = gen.json()
+
     genres_list = []
     genre = id2['genre_ids']
     for i in genre_list['genres']:
@@ -61,6 +64,7 @@ def search():
             genres_list.append(i['name'])
     movie = tmdb.Movies(movie_id)
     response = movie.info()
+
     dict1 = {'title': id2['original_title'],'overview': id2['overview'],'rating': id2['vote_average'],'release date': id2['release_date']}
     cast = movie.credits()['cast']
     crew = movie.credits()['crew']
@@ -83,11 +87,13 @@ def search():
 
     for i in range(len(actors)):
         concat_2 = "http://api.themoviedb.org/3/person/"+str(actors[i][3])+"?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
-    abc = requests.get(concat_2)
-    actor_info = abc.json()
-    actors[i].append(actor_info['birthday'])
-    actors[i].append(actor_info['place_of_birth'])
-    actors[i].append(actor_info['biography'])
+        abc = requests.get(concat_2)
+        actor_info = abc.json()
+        actors[i].append(actor_info['birthday'])
+        actors[i].append(actor_info['place_of_birth'])
+        actors[i].append(actor_info['biography'])
+    print(actors[0])
+    
     concat_3 = "http://api.themoviedb.org/3/person/"+str(director[2])+"?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
     abc = requests.get(concat_3)
     director_info = abc.json()
@@ -109,18 +115,30 @@ def search():
     actor1_name = actors[0][0]
     actor1_character = actors[0][1]
     actor1_image = actors[0][2]
+    actor1_bdate = actors[0][4]
+    actor1_birthplace = actors[0][5]
+    actor1_biography = actors[0][6]
     
     actor2_name = actors[1][0]
     actor2_character = actors[1][1]
     actor2_image = actors[1][2]
-   
+    actor2_bdate = actors[1][4]
+    actor2_birthplace = actors[1][5]
+    actor2_biography = actors[1][6]
+
     actor3_name = actors[2][0]
     actor3_character = actors[2][1]
-    actor3_image = actors[2][2] 
+    actor3_image = actors[2][2]
+    actor3_bdate = actors[2][4]
+    actor3_birthplace = actors[2][5]
+    actor3_biography = actors[2][6]
 
     actor4_name = actors[3][0]
     actor4_character = actors[3][1]
     actor4_image = actors[3][2]  
+    actor4_bdate = actors[3][4]
+    actor4_birthplace = actors[3][5]
+    actor4_biography = actors[3][6]
    
 
     #director_info:
@@ -128,15 +146,50 @@ def search():
     director_name = director[0]
     director_character = "Director"
     director_image = director[1]
+    director_bdate = director[3]
+    director_birthplace = director[4]
+    director_biography = director[5]
                 
     movie = [movie_title,movie_overview,movie_rating,movie_release_date,movie_genres,movie_image]
-    director = [director_name,director_character,director_image]
-    actor1 = [actor1_name,actor1_character,actor1_image]
-    actor2 = [actor2_name,actor2_character,actor2_image]
-    actor3 = [actor3_name,actor3_character,actor3_image]
-    actor4 = [actor4_name,actor4_character,actor4_image]
+    director = [director_name,director_character,director_image,director_bdate,director_birthplace,director_biography]
+    actor1 = [actor1_name,actor1_character,actor1_image,actor1_bdate,actor1_birthplace, actor1_biography]
+    actor2 = [actor2_name,actor2_character,actor2_image,actor2_bdate,actor2_birthplace, actor2_biography]
+    actor3 = [actor3_name,actor3_character,actor3_image,actor3_bdate,actor3_birthplace, actor3_biography]
+    actor4 = [actor4_name,actor4_character,actor4_image,actor4_bdate,actor4_birthplace, actor4_biography]
 
     return render_template('search-results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4],get_recom=get_recom)
+
+
+@app.route('/cast1')
+def cast1():
+    return render_template('cast_info.html',actor1=actor1)
+@app.route('/cast2')
+def cast2():
+    return render_template('cast_info1.html',actor4=actor4)
+
+@app.route('/cast3')
+def cast3():
+    return render_template('cast_info2.html',actor2=actor2)
+
+@app.route('/cast4')
+def cast4():
+    return render_template('cast_info3.html',actor3=actor3)
+
+@app.route('/cast5')
+def cast5():
+    return render_template('cast_into4.html',director=director)
+
+
+
+
+
+
+# @app.route('/cast1')
+# def cast1():
+#     return render_template('cast_info.html')
+
+
+
 
 # def get_recommendations(title):
 #     idx = indices[title]

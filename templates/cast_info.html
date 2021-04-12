@@ -2,8 +2,9 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Movie Card</title>
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+  <title>Cast Info</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/cast_style.css') }}">
 
 </head>
 <body>
@@ -11,13 +12,13 @@
 <div class="container">
   <div class="movie_card"> 
     <div class="movie_img">
-      <img src="https://image.tmdb.org/t/p/original/8A4PS5iG7GWEAVFftyqMZKl3qcr.jpg">
-		</div>
+      <img src="{{actor1[2]}}">
+	</div>
 
-  <div class="bg-text">Robert Pattinson</div>
+  <div class="bg-text">{{actor1[0]}}</div>
     <div class="movie">
       <!-- <div class="movie_rating">7.3<i>/</i> 10 <span>IMDb</span></div> -->
-			<h3 class="movie_title">Robert Pattinson</h3>
+			<h3 class="movie_title">{{actor1[0]}}</h3>
         
 			<div class="movie_info">
 				<span>
@@ -26,17 +27,17 @@
 				</span>
 				<span>
 					<i class="fas fa-film"></i>
-					Birth Place: <br>Los Angeles, California, USA
+					Birth Place: <br>{{actor1[4]}}
 				</span>
 				<span>
 					<i class="far fa-calendar"></i>
-					Birth date: <br>1984-07-28
+					Birth date: <br>{{actor1[3]}}
 				</span>
 			</div>
 
 			<div class="movie_text">
 				<p>
-					John David Washington (born July 28, 1984) is an American actor and former American football running back. He shifted to an acting career like his father, Denzel Washington and mother, Pauletta Washington. In 2015, he started with the HBO comedy series Ballers and his role in BlacKkKlansman (2018) brought him a Golden Globe nomination for Best Actor. He also starred in Tenet (2020) by Christopher Nolan, and Malcolm & Marie (2021).
+					{{actor1[5]}}
 				</p>
 			 </div>
 		 </div>
