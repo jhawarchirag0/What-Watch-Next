@@ -14,7 +14,7 @@ function init(){
 }
 
 window.onload = function() {
-  x = document.getElementsByClassName("movie");
+  x = document.getElementsByClassName("recom-movie");
   console.log(x);
   init();
 }

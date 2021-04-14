@@ -10,9 +10,50 @@ app=Flask(__name__)
 new_df,indices,new_df2 = None,None,None
 cosine_sim_overview,cosine_sim_cast,cosine_sim_crew,cosine_sim_genres=None,None,None,None
 actor1,actor2,actor3,actor4,director=None,None,None,None,None
+
 @app.route('/')
 def home():
-    return render_template('index1.html')
+    from tmdbv3api import TMDb
+    from tmdbv3api import Movie
+
+    tmdb = TMDb()
+    tmdb.api_key = '4d437864b2f333cb0fc07c9b104397c6'
+    tmdb.language = 'en'
+    tmdb.debug = True
+
+   
+    movie = Movie()
+    popularr = movie.popular()
+    popular=popularr[:7]
+
+    final_popular={}
+    for i in range(len(popular)):
+        l=[]
+        z=popular[i]['id']
+        m = movie.details(z)
+        l.append(m.title)
+        l.append(m.overview[:140])
+        l.append('https://image.tmdb.org/t/p/original//'+m.poster_path)
+        final_popular[i]=l
+
+
+    #for new releases
+    import requests
+    url="https://api.themoviedb.org/3/movie/upcoming?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US&page=1"
+    
+    info = requests.get(url)
+
+    json_edit = info.json()
+    a=json_edit['results']
+    new_release={}
+    for i in range(7):
+        x= a[i]['original_title']
+        y='https://image.tmdb.org/t/p/original/'+a[i]['backdrop_path']
+        z=a[i]['overview'][:140]
+        new_release[i]=[x,y,z]
+    
+#   print(temp)
+    return render_template('index1.html',final_popular=final_popular,new_release=new_release)
 
 
 @app.before_first_request
@@ -49,9 +90,17 @@ def search():
     tmdb.API_KEY = "4d437864b2f333cb0fc07c9b104397c6"
     concat_link = "http://api.themoviedb.org/3/search/movie?query="+movie_name+"&api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
     info = requests.get(concat_link)
-    json_edit = info.json()
-    id1 = json_edit['results']
-    id2 = id1[0]
+    if info == None:
+        print("Results not fetched")
+    info = info.json()
+    search_df = pd.DataFrame(info['results'])
+    # search_df.sort_values(by=['vote_count', 'vote_average'],ascending=False, inplace=True)
+    print(search_df[['title', 'vote_count', 'vote_average']])
+    search_df = search_df.to_dict(orient='records')[0]
+    id2 = search_df.copy()
+    search_df['backdrop_path'] = "https://image.tmdb.org/t/p/original" + search_df['backdrop_path']
+    print("Selected :")
+    print(search_df)
     movie_id = id2['id']
 
     gen = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US')
@@ -61,10 +110,11 @@ def search():
     genre = id2['genre_ids']
     for i in genre_list['genres']:
         if(i['id'] in genre):
+            print(i['name'])
             genres_list.append(i['name'])
+
     movie = tmdb.Movies(movie_id)
     response = movie.info()
-
     dict1 = {'title': id2['original_title'],'overview': id2['overview'],'rating': id2['vote_average'],'release date': id2['release_date']}
     cast = movie.credits()['cast']
     crew = movie.credits()['crew']
@@ -92,7 +142,7 @@ def search():
         actors[i].append(actor_info['birthday'])
         actors[i].append(actor_info['place_of_birth'])
         actors[i].append(actor_info['biography'])
-    print(actors[0])
+    # print(actors[0])
     
     concat_3 = "http://api.themoviedb.org/3/person/"+str(director[2])+"?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
     abc = requests.get(concat_3)
@@ -157,39 +207,12 @@ def search():
     actor3 = [actor3_name,actor3_character,actor3_image,actor3_bdate,actor3_birthplace, actor3_biography]
     actor4 = [actor4_name,actor4_character,actor4_image,actor4_bdate,actor4_birthplace, actor4_biography]
 
-    return render_template('search-results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4],get_recom=get_recom)
-
-
-@app.route('/cast1')
-def cast1():
-    return render_template('cast_info.html',actor1=actor1)
-@app.route('/cast2')
-def cast2():
-    return render_template('cast_info1.html',actor4=actor4)
-
-@app.route('/cast3')
-def cast3():
-    return render_template('cast_info2.html',actor2=actor2)
-
-@app.route('/cast4')
-def cast4():
-    return render_template('cast_info3.html',actor3=actor3)
-
-@app.route('/cast5')
-def cast5():
-    return render_template('cast_into4.html',director=director)
-
-
-
-
+    return render_template('results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4],get_recom=get_recom)
 
 
 # @app.route('/cast1')
 # def cast1():
-#     return render_template('cast_info.html')
-
-
-
+#     return render_template('cast_info.html',actor1=actor1)
 
 # def get_recommendations(title):
 #     idx = indices[title]

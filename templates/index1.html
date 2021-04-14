@@ -43,117 +43,101 @@
                 <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor
                     deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis
                     minima voluptatibus incidunt. Accusamus, provident.</p>
-                <button class="featured-button">WATCH</button>
             </div>
             <div class="movie-list-container">
                 <h1 class="movie-list-title">NEW RELEASES</h1>
                 <div class="movie-list-wrapper">
                     <div class="movie-list">
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/1.jpeg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{new_release[0][1]}}" alt="">
+                            <span class="movie-list-item-title">{{new_release[0][0]}}</span>
+                            <p class="movie-list-item-desc">{{new_release[0][2]}}</p>
+                            <!-- <button class="movie-list-item-button">Watch</button> -->
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/2.jpeg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{new_release[1][1]}}" alt="">
+                            <span class="movie-list-item-title">{{new_release[1][0]}}</span>
+                            <p class="movie-list-item-desc">{{new_release[1][2]}}</p>
+                            <!-- <button class="movie-list-item-button">Watch</button> -->
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/15.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{new_release[2][1]}}" alt="">
+                            <span class="movie-list-item-title">{{new_release[2][0]}}</span>
+                            <p class="movie-list-item-desc">{{new_release[2][2]}}</p>
+                            <!-- <button class="movie-list-item-button">Watch</button> -->
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/3.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{new_release[3][1]}}" alt="">
+                            <span class="movie-list-item-title">{{new_release[3][0]}}r</span>
+                            <p class="movie-list-item-desc">{{new_release[3][2]}}</p>
+                            <!-- <button class="movie-list-item-button">Watch</button> -->
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/4.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{new_release[4][1]}}" alt="">
+                            <span class="movie-list-item-title">{{new_release[4][0]}}</span>
+                            <p class="movie-list-item-desc">{{new_release[4][2]}}</p>
+                            <!-- <button class="movie-list-item-button">Watch</button> -->
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/5.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{new_release[5][1]}}" alt="">
+                            <span class="movie-list-item-title">{{new_release[5][0]}}</span>
+                            <p class="movie-list-item-desc">{{new_release[5][2]}}</p>
+                            <!-- <button class="movie-list-item-button">Watch</button> -->
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/1.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{new_release[6][1]}}" alt="">
+                            <span class="movie-list-item-title">{{new_release[6][0]}}</span>
+                            <p class="movie-list-item-desc">{{new_release[6][2]}}</p>
+                            <!-- <button class="movie-list-item-button">Watch</button> -->
                         </div>
                     </div>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
             </div>
             <div class="movie-list-container">
-                <h1 class="movie-list-title">NEW RELEASES</h1>
+                <h1 class="movie-list-title">POPULAR MOVIES</h1>
                 <div class="movie-list-wrapper">
                     <div class="movie-list">
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/17.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{final_popular[0][2]}}" alt="">
+                            <span class="movie-list-item-title">{{final_popular[0][0]}}</span>
+                            <p class="movie-list-item-desc">{{final_popular[0][1]}}</p>
+                            <!-- <button class="movie-list-item-button">Watch</button> -->
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/18.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{final_popular[1][2]}}" alt="">
+                            <span class="movie-list-item-title">{{final_popular[1][0]}}</span>
+                            <p class="movie-list-item-desc">{{final_popular[1][1]}}</p>
+
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/19.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{final_popular[2][2]}}" alt="">
+                            <span class="movie-list-item-title">{{final_popular[2][0]}}</span>
+                            <p class="movie-list-item-desc">{{final_popular[2][1]}}</p>
+                           
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/7.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{final_popular[3][2]}}" alt="">
+                            <span class="movie-list-item-title">{{final_popular[3][0]}}</span>
+                            <p class="movie-list-item-desc">{{final_popular[3][1]}}</p>
+                           
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/1.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{final_popular[4][2]}}" alt="">
+                            <span class="movie-list-item-title">{{final_popular[4][0]}}</span>
+                            <p class="movie-list-item-desc">{{final_popular[4][1]}}</p>
+                           
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/1.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{final_popular[5][2]}}" alt="">
+                            <span class="movie-list-item-title">{{final_popular[5][0]}}</span>
+                            <p class="movie-list-item-desc">{{final_popular[5][1]}}</p>
+                            
                         </div>
                         <div class="movie-list-item">
-                            <img class="movie-list-item-img" src="{{ url_for('static' , filename ='Images/1.jpg') }}" alt="">
-                            <span class="movie-list-item-title">Her</span>
-                            <p class="movie-list-item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                                hic fugit similique accusantium.</p>
-                            <button class="movie-list-item-button">Watch</button>
+                            <img class="movie-list-item-img" src="{{final_popular[6][2]}}" alt="">
+                            <span class="movie-list-item-title">{{final_popular[6][0]}}</span>
+                            <p class="movie-list-item-desc">{{final_popular[6][1]}}</p>
                         </div>
                     </div>
                     <i class="fas fa-chevron-right arrow"></i>

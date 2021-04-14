@@ -4,22 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--
-        <link rel="stylesheet" href="../CSS/search-results-style.css">
-
-    -->
-    
     <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/search-results-style.css') }}">
-
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"      rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-   
-    <!-- add -->
-    <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/styles.css') }}">
-    <!-- block -->
-    
+    <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/cast-styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/carousel.css') }}">
     <title>Search Results</title>
 </head>
@@ -91,42 +80,39 @@
           <div class="text">{{movien[2][0]}} AS {{movien[2][1]}}</div>
         </div>
     </div>
-      <div class="container1">
-        <a href="{{ url_for('cast2') }}" target="_blank">
-        <img src="{{movien[6][2]}}" class="cast-image"></a>
-        <div class="overlay">
-          <div class="text">{{movien[6][0]}} AS {{movien[6][1]}}</div>
-        </div>
+    <div class="container1">
+      <a href="{{ url_for('cast2') }}" target="_blank">
+      <img src="{{movien[6][2]}}" class="cast-image"></a>
+      <div class="overlay">
+        <div class="text">{{movien[6][0]}} AS {{movien[6][1]}}</div>
       </div>
-      
-      <div class="container1">
-        <a href="{{ url_for('cast3') }}" target="_blank">
-        <img src="{{movien[3][2]}}" class="cast-image"></a>
-        <div class="overlay">
-          <div class="text">{{movien[3][0]}} AS {{movien[3][1]}}</div>
-        </div>
+    </div>
+    <div class="container1">
+      <a href="{{ url_for('cast3') }}" target="_blank">
+      <img src="{{movien[3][2]}}" class="cast-image"></a>
+      <div class="overlay">
+        <div class="text">{{movien[3][0]}} AS {{movien[3][1]}}</div>
       </div>
-      <div class="container1">
-        <a href="{{ url_for('cast4') }}" target="_blank">
-        <img src="{{movien[4][2]}}" class="cast-image"></a>
-        <div class="overlay">
-          <div class="text">{{movien[4][0]}} AS {{movien[4][1]}}</div>
-        </div>
+    </div>
+    <div class="container1">
+      <a href="{{ url_for('cast4') }}" target="_blank">
+      <img src="{{movien[4][2]}}" class="cast-image"></a>
+      <div class="overlay">
+        <div class="text">{{movien[4][0]}} AS {{movien[4][1]}}</div>
       </div>
-      <div class="container1">
-        <a href="{{ url_for('cast5') }}" target="_blank">
-        <img src="{{movien[5][2]}}" class="cast-image"></a>
-        <div class="overlay">
-          <div class="text">{{movien[5][0]}} As The {{movien[5][1]}}</div>
-        </div>
-      </div> 
-    
+    </div>
+    <div class="container1">
+      <a href="{{ url_for('cast5') }}" target="_blank">
+      <img src="{{movien[5][2]}}" class="cast-image"></a>
+      <div class="overlay">
+        <div class="text">{{movien[5][0]}} As The {{movien[5][1]}}</div>
+      </div>
+    </div>
  </div>
-</div>  
-   
+</div>
 
  <!-- end -->
- <div class="container">
+<div class="container">
     <div class="arrow">
         <img class="left" src="{{ url_for('static' , filename ='Images/left.webp') }}" onclick="nextImage()">
     </div>
@@ -147,7 +133,7 @@
 
     for(var i=0; i<no_of_movies; i++){
         var movie_div = document.createElement("div");
-        movie_div.className = "movie";
+        movie_div.className = "recom-movie";
         
         var movie_name = document.createElement("H3");
         movie_name.className = "movie-name";
@@ -159,6 +145,7 @@
         movie_info.className = "movie-info";
     
         var movie_image = document.createElement("img");
+        movie_image.className = "recom-movie-image";
         // movie_image.src = "https://image.tmdb.org/t/p/original"+recommended_movies['poster_path'];
         // movie_image.src = "G:\SEM VI\Mini Project\What-Watch-Next\static\Images\2.jpeg";
         movie_image.alt = recommended_movies["title"][i];
@@ -167,6 +154,7 @@
         info_hover.className = "info-hover";
     
         var data = document.createElement("div")
+        data.className = "recom-data"
         var data_p = document.createElement("p");
         var data_p_text = document.createTextNode(recommended_movies["overview"][i]);
 
