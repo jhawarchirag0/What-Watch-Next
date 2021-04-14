@@ -51,9 +51,15 @@ def home():
         y='https://image.tmdb.org/t/p/original/'+a[i]['backdrop_path']
         z=a[i]['overview'][:140]
         new_release[i]=[x,y,z]
+
+
+    # for top_rated movie
+    link="https://api.themoviedb.org/3/tv/top_rated?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US&page=1"
+    details = requests.get(link)
+    json_details = details.json()
     
 #   print(temp)
-    return render_template('index1.html',final_popular=final_popular,new_release=new_release)
+    return render_template('index1.html',final_popular=final_popular,new_release=new_release,json_details=json_details)
 
 
 @app.before_first_request

@@ -62,11 +62,13 @@ body {
 }
 
 .featured-content {
+  /* background-image: url_for('static' , filename ='Images/f-t-1.png'); */
   height: 50vh;
   padding: 50px;
 }
 
 .featured-title {
+  height:250px;
   width: 200px;
 }
 
@@ -131,7 +133,7 @@ body {
 .movie-list-item-title {
   background-color: #333;
   padding: 0 10px;
-  font-size: 32px;
+  font-size: 20px;
   font-weight: bold;
   position: absolute;
   top: 10%;

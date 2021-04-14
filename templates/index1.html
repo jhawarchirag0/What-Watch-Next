@@ -36,13 +36,15 @@
         <i class="left-menu-icon fas fa-shopping-cart"></i>
     </div>
     <div class="container">
+        {% set temp = json_details['results'][0]['poster_path'] %}
+        <!-- <h1 style="text-align: center;">{{temp}}</h1> -->
+        {% set urlParam = ["https://image.tmdb.org/t/p/original/",temp]|join('') %}
+        <!-- <h1>{{urlParam}}</h1> -->
         <div class="content-container">
             <div class="featured-content"
-                style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url({{ url_for('static' , filename ='Images/1.jpeg') }};">
-                <img class="featured-title" src="{{ url_for('static' , filename ='Images/f-t-1.png') }}" alt="">
-                <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor
-                    deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis
-                    minima voluptatibus incidunt. Accusamus, provident.</p>
+                style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('{{urlParam}}';">
+                <img class="featured-title" src="{{urlParam }}" alt=""  width="500" height="300">
+                <p class="featured-desc">{{json_details['results'][0]['overview'][:450]}}</p>
             </div>
             <div class="movie-list-container">
                 <h1 class="movie-list-title">NEW RELEASES</h1>
@@ -130,7 +132,7 @@
                         </div>
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="{{final_popular[5][2]}}" alt="">
-                            <span class="movie-list-item-title">{{final_popular[5][0]}}</span>
+                            <span class="movie-list-item-title"> {{final_popular[5][0]}}</span>
                             <p class="movie-list-item-desc">{{final_popular[5][1]}}</p>
                             
                         </div>
