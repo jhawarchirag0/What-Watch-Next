@@ -101,12 +101,12 @@ def search():
     info = info.json()
     search_df = pd.DataFrame(info['results'])
     # search_df.sort_values(by=['vote_count', 'vote_average'],ascending=False, inplace=True)
-    print(search_df[['title', 'vote_count', 'vote_average']])
+    # print(search_df[['title', 'vote_count', 'vote_average']])
     search_df = search_df.to_dict(orient='records')[0]
     id2 = search_df.copy()
     search_df['backdrop_path'] = "https://image.tmdb.org/t/p/original" + search_df['backdrop_path']
-    print("Selected :")
-    print(search_df)
+    # print("Selected :")
+    # print(search_df)
     movie_id = id2['id']
 
     gen = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US')
@@ -123,7 +123,57 @@ def search():
     response = movie.info()
     dict1 = {'title': id2['original_title'],'overview': id2['overview'],'rating': id2['vote_average'],'release date': id2['release_date']}
     cast = movie.credits()['cast']
+    cast_df = pd.DataFrame(cast)
+    cast_df = cast_df[cast_df['known_for_department']=='Acting']
+    cast_df = cast_df.iloc[:4]
+    bday = []
+    pob = []
+    bio = []
+    for i in range(cast_df.shape[0]):
+        concat_2 = "http://api.themoviedb.org/3/person/"+str(cast_df.iloc[i]["id"])+"?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
+        abc = requests.get(concat_2)
+        actor_info = abc.json()
+        bday.append(actor_info['birthday'])
+        pob.append(actor_info['place_of_birth'])
+        bio_t = actor_info['biography'].split(".")[:2]
+        bio.append(".".join(bio_t))
+    cast_df["Bday"] = bday
+    cast_df["Place_of_birth"] = pob
+    cast_df["Bio"] = bio
+    # print(pd.DataFrame(cast_df))
+
+    cast_json = cast_df.to_dict("list")
+    cast_json = json.dumps(cast_json)
+
+# bio of actor
+    print(cast_json)
+
+
     crew = movie.credits()['crew']
+    crew_df = pd.DataFrame(crew)
+    crew_df = crew_df[crew_df['job']=='Director']
+    crew_df = crew_df.iloc[:1]
+    bday = []
+    pob = []
+    bio = []
+    for i in range(crew_df.shape[0]):
+        concat_2 = "http://api.themoviedb.org/3/person/"+str(crew_df.iloc[i]["id"])+"?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
+        abc = requests.get(concat_2)
+        crew_info = abc.json()
+        bday.append(crew_info['birthday'])
+        pob.append(crew_info['place_of_birth'])
+        bio_t = crew_info['biography'].split(".")[:2]
+        bio.append(".".join(bio_t))
+    crew_df["Bday"] = bday
+    crew_df["Place_of_birth"] = pob
+    crew_df["Bio"] = bio
+
+    print(crew_df)
+    
+    crew_json = crew_df.to_dict("list")
+    crew_json = json.dumps(crew_json)
+
+
     actors = []
     x=0
     for i in cast:
@@ -213,12 +263,12 @@ def search():
     actor3 = [actor3_name,actor3_character,actor3_image,actor3_bdate,actor3_birthplace, actor3_biography]
     actor4 = [actor4_name,actor4_character,actor4_image,actor4_bdate,actor4_birthplace, actor4_biography]
 
-    return render_template('results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4],get_recom=get_recom)
+    return render_template('results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4],get_recom=get_recom,cast_json= cast_json, crew_json=crew_json)
 
 
-# @app.route('/cast1')
-# def cast1():
-#     return render_template('cast_info.html',actor1=actor1)
+@app.route('/cast1')
+def cast1():
+    return render_template('cast_info.html')
 
 # def get_recommendations(title):
 #     idx = indices[title]

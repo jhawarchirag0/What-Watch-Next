@@ -52,32 +52,39 @@
             </div>
             <div class="cast_crew_data">
                 <div class="container1">
-                    <img src="{{movien[2][2]}}" class="cast-image"></a>
+                    <a href="{{ url_for('cast1') }}" target="_blank">
+                    <img src="{{movien[2][2]}}" class="cast-image" onclick="setData(0)"></a>
                     <div class="overlay">
-                        <div class="text">{{movien[2][0]}} AS {{movien[2][1]}}
+                        <div class="text">{{movien[2][0]}} ASS {{movien[2][1]}}
                         </div>
                     </div>
                 </div>
                 <div class="container1">
-                    <img src="{{movien[6][2]}}" class="cast-image"></a>
+                    <a href="{{ url_for('cast1') }}" target="_blank">
+                    <img src="{{movien[3][2]}}" class="cast-image" onclick="setData(1)"></a>
+                    <div class="overlay">
+                    <div class="text">{{movien[3][0]}} AS {{movien[3][1]}}</div>
+                    </div>
+                </div>
+                
+                
+                <div class="container1">
+                    <a href="{{ url_for('cast1') }}" target="_blank">
+                    <img src="{{movien[4][2]}}" class="cast-image" onclick="setData(2)"></a>
+                    <div class="overlay">
+                    <div class="text">{{movien[4][0]}} AS {{movien[4][1]}}</div>
+                    </div>
+                </div>
+                <div class="container1">
+                    <a href="{{ url_for('cast1') }}" target="_blank">
+                    <img src="{{movien[6][2]}}" class="cast-image" onclick="setData(3)"></a>
                     <div class="overlay">
                         <div class="text">{{movien[6][0]}} AS {{movien[6][1]}}
                         </div>
                     </div>
                 </div>
                 <div class="container1">
-                    <img src="{{movien[3][2]}}" class="cast-image"></a>
-                    <div class="overlay">
-                    <div class="text">{{movien[3][0]}} AS {{movien[3][1]}}</div>
-                    </div>
-                </div>
-                <div class="container1">
-                    <img src="{{movien[4][2]}}" class="cast-image"></a>
-                    <div class="overlay">
-                    <div class="text">{{movien[4][0]}} AS {{movien[4][1]}}</div>
-                    </div>
-                </div>
-                <div class="container1">
+                    <a href="{{ url_for('cast1') }}" target="_blank" onclick="setData(4)">
                     <img src="{{movien[5][2]}}" class="cast-image"></a>
                     <div class="overlay">
                     <div class="text">{{movien[5][0]}} As The {{movien[5][1]}}</div>
@@ -147,6 +154,90 @@
         }
     </script>
     <script src="{{ url_for('static' , filename ='js-files/slideshow.js') }}"></script>
+    <!-- <script src="{{ url_for('static' , filename ='js-files/cast_info.js') }}"></script> -->
+    <script>
+        function setData(id){
+            localStorage.clear();
+            if (id<=3){
+                arr=[];
+                actor_details = JSON.parse({{ cast_json | tojson }});
+        
+                // for character name
+                console.log(actor_details["character"][id]);
+                char_name=actor_details["character"][id];
+                arr.push(char_name);
+    
+                // for real name
+                console.log(actor_details["name"][id]);
+                name=actor_details["name"][id];
+                arr.push(name)
+    
+                // for image
+                var t1='https://image.tmdb.org/t/p/original//';
+                var t2=actor_details["profile_path"][id]
+                var res = t1.concat(t2);
+                console.log(res);
+                arr.push(res);
+                console.log(arr);
+    
+                // for dob
+                var dob = actor_details["Bday"][id];
+                console.log(dob);
+                arr.push(dob);
+    
+                // for place of birth
+                var place_birth = actor_details["Place_of_birth"][id];
+                arr.push(place_birth);
+    
+                // bio of actor
+                var bio = actor_details["Bio"][id];
+                arr.push(bio);
+    
+                // store the details in local storage
+                localStorage.setItem('arr',JSON.stringify(arr));
+            }
+            else{
+                arr=[];
+                crew_details = JSON.parse({{ crew_json | tojson }});
+                console.log(crew_details);
+
+                // for character name
+                arr.push("");
+
+                // for real name
+                console.log(crew_details["name"][0]);
+                name=crew_details["name"][0];
+                arr.push(name)
+
+                // for image
+                var t1='https://image.tmdb.org/t/p/original//';
+                var t2=crew_details["profile_path"][0]
+                var res = t1.concat(t2);
+                console.log(res);
+                arr.push(res);
+                console.log(arr);
+
+                // for dob
+                var dob = crew_details["Bday"][0];
+                console.log(dob);
+                arr.push(dob);
+
+                // for place of birth
+                var place_birth = crew_details["Place_of_birth"][0];
+                arr.push(place_birth);
+
+                // bio of actor
+                var bio = crew_details["Bio"][0];
+                arr.push(bio);
+
+                // store the details in local storage
+                localStorage.setItem('arr',JSON.stringify(arr));
+
+                console.log("**********************");
+                console.log(arr);
+            }
+        }
+    </script>
     
 </body>
 </html>

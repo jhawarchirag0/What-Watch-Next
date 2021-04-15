@@ -6,44 +6,54 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/cast_style.css') }}">
 
+
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div class="container">
-  <div class="movie_card"> 
-    <div class="movie_img">
-      <img src="{{actor1[2]}}">
-	</div>
-
-  <div class="bg-text">{{actor1[0]}}</div>
-    <div class="movie">
-      <!-- <div class="movie_rating">7.3<i>/</i> 10 <span>IMDb</span></div> -->
-			<h3 class="movie_title">{{actor1[0]}}</h3>
-        
-			<div class="movie_info">
-				<span>
-					<i class="far fa-clock"></i>
-					Runtime: <br>2h 28min
-				</span>
-				<span>
-					<i class="fas fa-film"></i>
-					Birth Place: <br>{{actor1[4]}}
-				</span>
-				<span>
-					<i class="far fa-calendar"></i>
-					Birth date: <br>{{actor1[3]}}
-				</span>
+		<!-- partial:index.partial.html -->
+		<div class="container">
+		  <div class="movie_card"> 
+			<div class="movie_img">
+				<img id="retrive-image" alt = "Blank">
 			</div>
-
-			<div class="movie_text">
-				<p>
-					{{actor1[5]}}
-				</p>
+		
+		  <div class="bg-text"></div>
+			<div class="movie">
+			  <!-- <div class="movie_rating">7.3<i>/</i> 10 <span>IMDb</span></div> -->
+					<h3 class="movie_title">###</h3>
+				
+					<div class="movie_info">
+						<span>
+							<i class="fas fa-film"></i>
+							<br>
+						</span>
+						<span>
+							<i class="far fa-calendar"></i>
+							<br>
+						</span>
+					</div>
+		
+					<div class="movie_text">
+						<p>
+						</p>
+					 </div>
+				 </div>
 			 </div>
-		 </div>
-	 </div>
-</div>
-<!-- partial -->
-  
+		</div>
+		<!-- partial -->
+		<script>
+			var details=JSON.parse(localStorage.getItem("arr"));
+			var bgtext=details[1];
+			var im = details[2];
+			var bio = details[5];
+			var dob = details[3];
+			var pob = details[4];
+			console.log(bgtext);
+			document.getElementsByClassName('bg-text')[0].innerHTML=bgtext;
+			document.getElementsByClassName('movie_title')[0].innerHTML=bgtext;
+			document.getElementsByClassName('far fa-calendar')[0].innerHTML='Birth date: '+dob;
+			document.getElementsByClassName('movie_text')[0].innerHTML=bio;
+			document.getElementsByClassName('fas fa-film')[0].innerHTML='Birth Place: '+pob;
+			document.getElementById("retrive-image").src = im;
+		</script>
 </body>
 </html>
