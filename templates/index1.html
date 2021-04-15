@@ -26,7 +26,7 @@
 			</div>
         </div>
     </div>
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <i class="left-menu-icon fas fa-search"></i>
         <i class="left-menu-icon fas fa-home"></i>
         <i class="left-menu-icon fas fa-users"></i>
@@ -34,7 +34,7 @@
         <i class="left-menu-icon fas fa-tv"></i>
         <i class="left-menu-icon fas fa-hourglass-start"></i>
         <i class="left-menu-icon fas fa-shopping-cart"></i>
-    </div>
+    </div> -->
     <div class="container">
         {% set temp = json_details['results'][0]['poster_path'] %}
         <!-- <h1 style="text-align: center;">{{temp}}</h1> -->
@@ -70,7 +70,7 @@
                         </div>
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="{{new_release[3][1]}}" alt="">
-                            <span class="movie-list-item-title">{{new_release[3][0]}}r</span>
+                            <span class="movie-list-item-title">{{new_release[3][0]}}</span>
                             <p class="movie-list-item-desc">{{new_release[3][2]}}</p>
                             <!-- <button class="movie-list-item-button">Watch</button> -->
                         </div>

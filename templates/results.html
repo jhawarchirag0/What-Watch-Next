@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/search-results-style.css') }}"> -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-    
-    
-    <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/cast-styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/results.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/cast-styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/carousel.css') }}">
     <title>Search Results</title>
@@ -55,7 +53,7 @@
                     <a href="{{ url_for('cast1') }}" target="_blank">
                     <img src="{{movien[2][2]}}" class="cast-image" onclick="setData(0)"></a>
                     <div class="overlay">
-                        <div class="text">{{movien[2][0]}} ASS {{movien[2][1]}}
+                        <div class="text">{{movien[2][0]}} AS {{movien[2][1]}}
                         </div>
                     </div>
                 </div>
