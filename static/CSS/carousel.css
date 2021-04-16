@@ -1,12 +1,13 @@
 .recom-container{
     height: 600px;
-    width: 800px;
+    width: 70%;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
-    margin: 5% 15%;
+    margin: auto;
     padding: 2% 3%;
     border-radius: 20px;
+    margin-top: 50px;
     margin-bottom: 50px;
     background-color: rgb(248, 246, 248);
     box-shadow: 0 5px 10px #c06c84;
@@ -49,6 +50,7 @@
 }
 
 .recom-movie-name{
+    font-size: 30px;
     text-align: center;
     margin: 0%;
     margin-bottom: 20px;
@@ -86,13 +88,17 @@
 .recom-movie-info:hover .recom-info-hover{
     height: 100%;
     width: 50%;
-    /* padding: 8px 15px; */
     visibility: visible;
     opacity: 0.8;
+    border-radius: 30px;
 }
 
 .recom-data{
+    font-size: 18px;
     height: 60%;
     width: 90%;
     margin: auto;
+    display: flex;
+    align-items: center;
+    line-height: 1.8;
 }
