@@ -9,7 +9,8 @@ from tmdbv3api import TMDb, Movie
 
 app=Flask(__name__)
 new_df,indices,new_df2 = None,None,None
-cosine_sim_overview,cosine_sim_cast,cosine_sim_crew,cosine_sim_genres=None,None,None,None
+final_cosine_sim=None
+m_id = None
 actor1,actor2,actor3,actor4,director=None,None,None,None,None
 
 
@@ -26,11 +27,8 @@ def before_first_request_func():
     indices["index"] = new_df2.index
     indices["title"] = new_df2['title']
     # load numpy array from npy file
-    # global cosine_sim_overview,cosine_sim_cast,cosine_sim_crew,cosine_sim_genres
-    # cosine_sim_overview = load(r'/wieghts_MRS/data_cosine_sim_overview.npy')
-    # cosine_sim_cast = load(r'/wieghts_MRS/data_cosine_sim_cast.npy')
-    # cosine_sim_crew = load(r'/wieghts_MRS/data_cosine_sim_crew_2.npy')
-    # cosine_sim_genres = load(r'/wieghts_MRS/data_cosine_sim_genres.npy')
+    global final_cosine_sim
+    final_cosine_sim = load('dataset/final_cosine_sim_25k.npy')
 
 
 
@@ -38,7 +36,7 @@ def before_first_request_func():
 def home():
     try:
         tmdb = TMDb()
-        tmdb.api_key = '4d437864b2f333cb0fc07c9b104397c6'
+        tmdb.api_key = '036791174fdd67b8996bc53ad1a686f2'
         tmdb.language = 'en'
         tmdb.debug = True
 
@@ -55,8 +53,8 @@ def home():
             l.append(m.overview[:140])
             l.append('https://image.tmdb.org/t/p/original//'+m.poster_path)
             final_popular[i]=l
-        # print("i wil get it done!!",final_popular)
-        url="https://api.themoviedb.org/3/movie/upcoming?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US&page=1"
+
+        url="https://api.themoviedb.org/3/movie/upcoming?api_key=036791174fdd67b8996bc53ad1a686f2&language=en-US&page=1"
         
         info = requests.get(url)
 
@@ -71,7 +69,7 @@ def home():
 
 
         # for top_rated movie
-        link="https://api.themoviedb.org/3/tv/top_rated?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US&page=1"
+        link="https://api.themoviedb.org/3/tv/top_rated?api_key=036791174fdd67b8996bc53ad1a686f2&language=en-US&page=1"
         details = requests.get(link)
         json_details = details.json()
         
@@ -87,8 +85,8 @@ def search():
         global actor1,actor2,actor3,actor4,director
         movie_name = request.form["movie_name"]
 
-        tmdb.API_KEY = "4d437864b2f333cb0fc07c9b104397c6"
-        concat_link = "http://api.themoviedb.org/3/search/movie?query="+movie_name+"&api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
+        tmdb.API_KEY = "036791174fdd67b8996bc53ad1a686f2"
+        concat_link = "http://api.themoviedb.org/3/search/movie?query="+movie_name+"&api_key=036791174fdd67b8996bc53ad1a686f2&language=en-US"
         info = requests.get(concat_link)
         if info == None:
             print("Results not fetched")
@@ -99,23 +97,25 @@ def search():
         search_df['backdrop_path'] = "https://image.tmdb.org/t/p/original" + search_df['backdrop_path']
         movie_id = id2['id']
 
-        gen = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US')
+        gen = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=036791174fdd67b8996bc53ad1a686f2&language=en-US')
         genre_list = gen.json()
 
         genres_list = []
         genre = id2['genre_ids']
         for i in genre_list['genres']:
             if(i['id'] in genre):
-                print(i['name'])
                 genres_list.append(i['name'])
 
         movie = tmdb.Movies(movie_id)
         response = movie.info()
         dict1 = {'title': id2['original_title'],'overview': id2['overview'],'rating': id2['vote_average'],'release date': id2['release_date']}
 
-        # get_recom = get_recommendations(dict1['title']).to_dict("list")
-        # get_recom = json.dumps(get_recom)
-        get_recom = new_df
+        global m_id
+        m_id = movie_id
+        get_recom = get_recommendations().to_dict("list")
+        print(get_recom)
+        get_recom = json.dumps(get_recom)
+        # get_recom = new_df
 
         cast = movie.credits()['cast']
         cast_df = pd.DataFrame(cast)
@@ -125,7 +125,7 @@ def search():
         pob = []
         bio = []
         for i in range(cast_df.shape[0]):
-            concat_2 = "http://api.themoviedb.org/3/person/"+str(cast_df.iloc[i]["id"])+"?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
+            concat_2 = "http://api.themoviedb.org/3/person/"+str(cast_df.iloc[i]["id"])+"?api_key=036791174fdd67b8996bc53ad1a686f2&language=en-US"
             abc = requests.get(concat_2)
             actor_info = abc.json()
             bday.append(actor_info['birthday'])
@@ -140,9 +140,8 @@ def search():
         cast_json = cast_df.to_dict("list")
         cast_json = json.dumps(cast_json)
 
-    #   bio of actor
-        print(cast_json)
-
+        # bio of actor
+        # print(cast_json)
 
         crew = movie.credits()['crew']
         crew_df = pd.DataFrame(crew)
@@ -152,7 +151,7 @@ def search():
         pob = []
         bio = []
         for i in range(crew_df.shape[0]):
-            concat_2 = "http://api.themoviedb.org/3/person/"+str(crew_df.iloc[i]["id"])+"?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
+            concat_2 = "http://api.themoviedb.org/3/person/"+str(crew_df.iloc[i]["id"])+"?api_key=036791174fdd67b8996bc53ad1a686f2&language=en-US"
             abc = requests.get(concat_2)
             crew_info = abc.json()
             bday.append(crew_info['birthday'])
@@ -163,7 +162,7 @@ def search():
         crew_df["Place_of_birth"] = pob
         crew_df["Bio"] = bio
 
-        print(crew_df)
+        # print(crew_df)
         
         crew_json = crew_df.to_dict("list")
         crew_json = json.dumps(crew_json)
@@ -187,15 +186,15 @@ def search():
                 break    
 
         for i in range(len(actors)):
-            concat_2 = "http://api.themoviedb.org/3/person/"+str(actors[i][3])+"?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
+            concat_2 = "http://api.themoviedb.org/3/person/"+str(actors[i][3])+"?api_key=036791174fdd67b8996bc53ad1a686f2&language=en-US"
             abc = requests.get(concat_2)
             actor_info = abc.json()
             actors[i].append(actor_info['birthday'])
             actors[i].append(actor_info['place_of_birth'])
             actors[i].append(actor_info['biography'])
-
+        # print(actors[0])
         
-        concat_3 = "http://api.themoviedb.org/3/person/"+str(director[2])+"?api_key=4d437864b2f333cb0fc07c9b104397c6&language=en-US"
+        concat_3 = "http://api.themoviedb.org/3/person/"+str(director[2])+"?api_key=036791174fdd67b8996bc53ad1a686f2&language=en-US"
         abc = requests.get(concat_3)
         director_info = abc.json()
         director.append(director_info['birthday'])
@@ -256,7 +255,7 @@ def search():
         actor3 = [actor3_name,actor3_character,actor3_image,actor3_bdate,actor3_birthplace, actor3_biography]
         actor4 = [actor4_name,actor4_character,actor4_image,actor4_bdate,actor4_birthplace, actor4_biography]
 
-        return render_template('results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4],get_recom=get_recom,cast_json= cast_json, crew_json=crew_json)
+        return render_template('results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4],get_recom=get_recom, cast_json= cast_json, crew_json=crew_json)
     except:
         e='The movie that you have entered is not stored in our database'
         print(e)    
@@ -267,17 +266,16 @@ def search():
 def cast1():
     return render_template('cast_info.html')
 
-def get_recommendations(title):
-    idx = indices[indices["title"] == title]["index"].to_list()[0]
-    final_sim = np.array(cosine_sim_overview[idx])
-    final_sim += np.array(cosine_sim_cast[idx])
-    final_sim += np.array(cosine_sim_crew[idx])
-    final_sim += np.array(cosine_sim_genres[idx])
+def get_recommendations():
+    idx = m_id
+    final_sim = np.array(final_cosine_sim[idx])
     sim_scores = list(enumerate(final_sim))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:11]
     movie_indices = [i[0] for i in sim_scores]
-    return new_df2['title'].iloc[movie_indices]
+    print(movie_indices)
+
+    return new_df2.iloc[movie_indices]
 
     
 if __name__=="__main__":
