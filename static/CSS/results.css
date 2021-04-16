@@ -119,9 +119,14 @@ body {
   justify-content: center;
   overflow: hidden;
 }
-
+@font-face{
+  font-family: 'Teko';
+  src:url(../Fonts/NewTegomin-Regular.ttf);
+  font-style: normal;
+  font-weight: 100;
+}
 .movie-details{
-  font-family: 'Architects Daughter', cursive;
+  font-family: Teko;
   color: white;
   width: 65%;
   height: 100%;

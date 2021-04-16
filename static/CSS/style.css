@@ -139,6 +139,7 @@ body {
 }
 
 .featured-desc {
+  font-family: DelaGothicOne;
   width: 500px;
   color: lightgray;
   margin: 30px 0;
@@ -158,13 +159,26 @@ body {
   outline: none;
   font-weight: bold;
 }
+@font-face{
+  font-family: 'ZenDots';
+  src:url(../Fonts/ZenDots-Regular.ttf);
+  font-style: normal;
+  font-weight: 100;
+}
+@font-face{
+  font-family: 'DelaGothicOne';
+  src:url(../Fonts/DelaGothicOne-Regular.ttf);
+  font-style: normal;
+  font-weight: 100;
+}
 
 .movie-list-container {
   padding: 20px 20px 0px 0px;
 }
 
 h1.movie-list-title {
-  text-align: center;
+  font-family: ZenDots;
+  /* text-align: center; */
 }
 
 .movie-list-wrapper {

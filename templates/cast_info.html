@@ -19,7 +19,7 @@
 		  <div class="bg-text"></div>
 			<div class="movie">
 			  <!-- <div class="movie_rating">7.3<i>/</i> 10 <span>IMDb</span></div> -->
-					<h3 class="movie_title">###</h3>
+					<h3 class="movie_title"></h3>
 				
 					<div class="movie_info">
 						<span>
@@ -52,7 +52,7 @@
 			document.getElementsByClassName('movie_title')[0].innerHTML=bgtext;
 			document.getElementsByClassName('far fa-calendar')[0].innerHTML='Birth date: '+dob;
 			document.getElementsByClassName('movie_text')[0].innerHTML=bio;
-			document.getElementsByClassName('fas fa-film')[0].innerHTML='Birth Place: '+pob;
+			document.getElementsByClassName('fas fa-film')[0].innerHTML='Birth Place: '+pob+" ";
 			document.getElementById("retrive-image").src = im;
 		</script>
 </body>
