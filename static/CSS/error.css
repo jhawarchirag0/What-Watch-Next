@@ -1,0 +1,23 @@
+
+.validation {
+	border: 1px solid;
+	margin: 10px auto;
+	padding: 15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	max-width: 460px;
+}
+/*.error:before{
+   font-family: FontAwesome;
+   content: '\f057';
+   font-size: 24px;
+   color: #D8000C;
+}*/
+.validation {
+	color: #D63301;
+	background-color: #FFCCBA;
+	background-image:url('/static/Images/error.png')
+}
+/*.M{
+	text-align: cen
+}*/

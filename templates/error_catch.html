@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static' , filename ='CSS/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static' , filename ='CSS/error.css') }}" />
+</head>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+        <title>What Watch Next ?</title>
+    </head>
+    
+    <body style="background-color: grey;">
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="logo-container">
+                    <h1 class="logo">What Watch Next ?</h1>
+                </div>
+                <div class="search">
+                    <form class="search-form" method="POST" action="{{ url_for('search')}}">
+                        <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+                        <input name="movie_name" id="search" onKeyPress="" type="search" placeholder="&nbsp;Search for a movie..." class="search-input" value="">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="validation">
+            {{e}}
+         </div>
+    </body>
+
+</html>
