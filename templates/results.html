@@ -125,7 +125,7 @@
         
             var movie_image = document.createElement("img");
             movie_image.className = "recom-movie-image";
-            movie_image.src = "https://image.tmdb.org/t/p/original"+recommended_movies['poster_path'];
+            movie_image.src = recommended_movies['backdrop_path'][i];
             movie_image.alt = recommended_movies["title"][i];
         
             var info_hover = document.createElement("div");

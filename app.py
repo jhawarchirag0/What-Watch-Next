@@ -28,7 +28,7 @@ def before_first_request_func():
     indices["title"] = new_df2['title']
     # load numpy array from npy file
     global final_cosine_sim
-    final_cosine_sim = load('dataset/final_cosine_sim_25k.npy')
+    final_cosine_sim = load('dataset/final_cosine_sim_15k.npy')
 
 
 
@@ -111,10 +111,21 @@ def search():
         dict1 = {'title': id2['original_title'],'overview': id2['overview'],'rating': id2['vote_average'],'release date': id2['release_date']}
 
         global m_id
-        m_id = movie_id
-        get_recom = get_recommendations().to_dict("list")
-        print(get_recom)
-        get_recom = json.dumps(get_recom)
+        m_id = id2['original_title']
+        recom_df2 = get_recommendations().to_dict('list')
+        recom_df2 = recom_df2['id']
+        recom_df = pd.DataFrame()
+        for ele in recom_df2:
+            re_movie = tmdb.Movies(ele)
+            re_response = re_movie.info()
+            if re_response['backdrop_path']!=None:
+                re_response['backdrop_path'] = "https://image.tmdb.org/t/p/original" + re_response['backdrop_path']
+            else:
+                re_response['backdrop_path'] = ""
+            recom_df = recom_df.append(re_response, ignore_index=True)
+        recom_df = recom_df.to_dict('list')
+        print(recom_df)
+        get_recom = json.dumps(recom_df)
         # get_recom = new_df
 
         cast = movie.credits()['cast']
@@ -135,7 +146,7 @@ def search():
         cast_df["Bday"] = bday
         cast_df["Place_of_birth"] = pob
         cast_df["Bio"] = bio
-        # print(pd.DataFrame(cast_df))
+        print(pd.DataFrame(cast_df))
 
         cast_json = cast_df.to_dict("list")
         cast_json = json.dumps(cast_json)
@@ -161,8 +172,8 @@ def search():
         crew_df["Bday"] = bday
         crew_df["Place_of_birth"] = pob
         crew_df["Bio"] = bio
-
-        # print(crew_df)
+        print()
+        print(crew_df)
         
         crew_json = crew_df.to_dict("list")
         crew_json = json.dumps(crew_json)
@@ -201,7 +212,7 @@ def search():
         director.append(director_info['place_of_birth'])
         director.append(director_info['biography'])
 
-        #movie_info:
+        # #movie_info:
 
         movie_title = dict1['title']
         movie_overview = dict1['overview']
@@ -211,7 +222,7 @@ def search():
         movie_image = "https://image.tmdb.org/t/p/original"+id2['backdrop_path']
 
         #Actors_info:
-
+        # if cast_df.iloc[0]>0:
         actor1_name = actors[0][0]
         actor1_character = actors[0][1]
         actor1_image = actors[0][2]
@@ -256,8 +267,8 @@ def search():
         actor4 = [actor4_name,actor4_character,actor4_image,actor4_bdate,actor4_birthplace, actor4_biography]
 
         return render_template('results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4],get_recom=get_recom, cast_json= cast_json, crew_json=crew_json)
-    except:
-        e='The movie that you have entered is not stored in our database'
+    except Exception as e:
+        # e='The movie that you have entered is not stored in our database'
         print(e)    
         return render_template('error_catch.html',e=e)
 
@@ -267,7 +278,7 @@ def cast1():
     return render_template('cast_info.html')
 
 def get_recommendations():
-    idx = m_id
+    idx = indices[indices["title"] == m_id]["index"].to_list()[0]
     final_sim = np.array(final_cosine_sim[idx])
     sim_scores = list(enumerate(final_sim))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
@@ -275,7 +286,7 @@ def get_recommendations():
     movie_indices = [i[0] for i in sim_scores]
     print(movie_indices)
 
-    return new_df2.iloc[movie_indices]
+    return new_df2[['id']].iloc[movie_indices]
 
     
 if __name__=="__main__":
