@@ -76,7 +76,7 @@ def home():
         return render_template('index1.html',final_popular=final_popular,new_release=new_release,json_details=json_details)
     except Exception as e:
         print(e)
-        return render_template('error_catch.html',e=e)
+        return render_template('error_catch.html',e="Something went Wrong!")
 
 
 @app.route('/search',methods=['POST'])
