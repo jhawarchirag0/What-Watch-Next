@@ -1,11 +1,16 @@
+import sys
 import os
 import numpy as np
 import pandas as pd
 from numpy import load
-from flask import Flask, request, jsonify, render_template,json
+from flask import Flask, request, jsonify, render_template, json
 import tmdbsimple as tmdb
 import requests
 from tmdbv3api import TMDb, Movie
+from importlib import reload
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 app=Flask(__name__)
 new_df,indices,new_df2 = None,None,None
@@ -29,6 +34,7 @@ def before_first_request_func():
     # load numpy array from npy file
     global final_cosine_sim
     final_cosine_sim = load('dataset/final_cosine_sim_15k.npy')
+    print("Loaded Weights")
 
 
 
@@ -76,7 +82,7 @@ def home():
         return render_template('index1.html',final_popular=final_popular,new_release=new_release,json_details=json_details)
     except Exception as e:
         print(e)
-        return render_template('error_catch.html',e="Something went Wrong!")
+        return render_template('error_catch.html',e="Something went Wrong! " + str(e))
 
 
 @app.route('/search',methods=['POST'])
@@ -84,12 +90,14 @@ def search():
     try:
         global actor1,actor2,actor3,actor4,director
         movie_name = request.form["movie_name"]
-
+        print("Recieved request for movie: " + movie_name)
         tmdb.API_KEY = "036791174fdd67b8996bc53ad1a686f2"
         concat_link = "http://api.themoviedb.org/3/search/movie?query="+movie_name+"&api_key=036791174fdd67b8996bc53ad1a686f2&language=en-US"
         info = requests.get(concat_link)
         if info == None:
             print("Results not fetched")
+        else:
+            print("Results fetched")
         info = info.json()
         search_df = pd.DataFrame(info['results'])
         search_df = search_df.to_dict(orient='records')[0]
@@ -109,6 +117,7 @@ def search():
         movie = tmdb.Movies(movie_id)
         response = movie.info()
         dict1 = {'title': id2['original_title'],'overview': id2['overview'],'rating': id2['vote_average'],'release date': id2['release_date']}
+        print("Movie Name: ", dict1['title'], "Movie id: ", movie_id)
 
         global m_id
         m_id = id2['original_title']
@@ -116,15 +125,25 @@ def search():
         recom_df2 = recom_df2['id']
         recom_df = pd.DataFrame()
         for ele in recom_df2:
+            print("Getting data for Movie id:", ele)
             re_movie = tmdb.Movies(ele)
+            ##Temproary
+            temp = str(re_movie.info())
+            for i in range(len(temp)):
+                print(temp[i], end="")
+            ##
             re_response = re_movie.info()
+            temp = str(re_response)
+            for i in range(len(temp)):
+                print(temp[i])
+            print(re_response)
             if re_response['backdrop_path']!=None:
                 re_response['backdrop_path'] = "https://image.tmdb.org/t/p/original" + re_response['backdrop_path']
             else:
                 re_response['backdrop_path'] = ""
             recom_df = recom_df.append(re_response, ignore_index=True)
         recom_df = recom_df.to_dict('list')
-        print(recom_df)
+        print("Recommendation Movies: ", recom_df)
         get_recom = json.dumps(recom_df)
         # get_recom = new_df
 
@@ -265,12 +284,13 @@ def search():
         actor2 = [actor2_name,actor2_character,actor2_image,actor2_bdate,actor2_birthplace, actor2_biography]
         actor3 = [actor3_name,actor3_character,actor3_image,actor3_bdate,actor3_birthplace, actor3_biography]
         actor4 = [actor4_name,actor4_character,actor4_image,actor4_bdate,actor4_birthplace, actor4_biography]
+        print("Actor 1 details: ", actor1)
 
         return render_template('results.html',movien=[movie,director,actor1,actor2,actor3,director,actor4],get_recom=get_recom, cast_json= cast_json, crew_json=crew_json)
     except Exception as e:
         # e='The movie that you have entered is not stored in our database'
         print(e)    
-        return render_template('error_catch.html',e=e)
+        return render_template('error_catch.html',e="Something went wrong! " + str(e))
 
 
 @app.route('/cast1')
@@ -284,8 +304,7 @@ def get_recommendations():
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:11]
     movie_indices = [i[0] for i in sim_scores]
-    print(movie_indices)
-
+    print("Recommendation Movies Indexes: ", movie_indices)
     return new_df2[['id']].iloc[movie_indices]
 
     
