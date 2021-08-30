@@ -1,4 +1,3 @@
-import sys
 import os
 import numpy as np
 import pandas as pd
@@ -8,9 +7,6 @@ import tmdbsimple as tmdb
 import requests
 from tmdbv3api import TMDb, Movie
 from importlib import reload
-
-reload(sys)
-sys.setdefaultencoding('utf8')
 
 app=Flask(__name__)
 new_df,indices,new_df2 = None,None,None
@@ -304,7 +300,7 @@ def get_recommendations():
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:11]
     movie_indices = [i[0] for i in sim_scores]
-    print("Recommendation Movies Indexes: ", movie_indices)
+    print("Recommendation Movies Id: ", movie_indices)
     return new_df2[['id']].iloc[movie_indices]
 
     
