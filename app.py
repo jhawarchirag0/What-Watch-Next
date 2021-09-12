@@ -29,7 +29,7 @@ def before_first_request_func():
     indices["title"] = new_df2['title']
     # load numpy array from npy file
     global final_cosine_sim
-    final_cosine_sim = load('dataset/final_cosine_sim_15k.npy')
+    final_cosine_sim = load('dataset/final_cosine_sim_5k.npy')
     print("Loaded Weights")
 
 
